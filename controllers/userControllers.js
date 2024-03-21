@@ -55,26 +55,35 @@ const updateUser = (req, res) => {
                         .then((hash) => {
                             req.body.password = hash
 
-                            // On empêche l'utilisateur de mettre à jour son username
                             req.body.username = result.username
-
                             return result.update(req.body)
                                 .then(() => {
-                                    res.status(201).json({ message: `L'utilisateur a bien été mis à jour.`, data: result })
+                                    res.status(201).json({ message: `The password was updated.`, data: result })
                                 })
                         })
                 }
             } else {
-                res.status(404).json({ message: `Aucun utilisateur à mettre à jour n'a été trouvé.` })
+                res.status(404).json({ message: `No user to update was found.` })
             }
+             // if (result) {
+                //     return result.update(req.body)
+                //         .then(() => {
+                //             res.status(201).json({ message: 'The username was updated.', data: result })
+                //         })
+
+                // } else {
+                //     res.status(404).json({ message: `No username was updated.` })
+                // }
         })
         .catch(error => {
             if (error instanceof UniqueConstraintError || error instanceof ValidationError) {
                 return res.status(400).json({ message: error.message })
             }
-            res.status(500).json({ message: 'Une erreur est survenue.', data: error.message })
+            res.status(500).json({ message: 'An error as occured.', data: error.message })
         })
 }
+
+
 
 const deleteUser = (req, res) => {
     User.findByPk(req.params.id)

@@ -29,11 +29,11 @@ const login = (req, res) => {
                         data: result.email, // Utilisation du champ "email" au lieu de "username"
                         dataId: result.id,
                         dataRole: result.RoleId,
+                        data: result.username, 
                         // Quand expire la session
                     }, SECRET_KEY, { expiresIn: '10h' });
 
-                    // Possibilité de stocker le jwt dans un cookie côté client
-                    // res.cookie('coworkingapi_jwt', token)
+                   
                     res.json({ message: `Login réussi`, data: token })
                 })
                 .catch(error => {
@@ -80,7 +80,7 @@ const restrict = (labelRole) => {
                         if (rolesHierarchy[role.label].includes(labelRole)) {
                             next()
                         } else {
-                            res.status(403).json({ message: `Insufficient rights` })
+                            res.status(403).json({ message: `droit insuffisant` })
                         }
                     })
                     .catch(error => {
@@ -163,6 +163,7 @@ const correctUser = (req, res, next) => {
     //     return res.status(403).json({ message: 'Droits insuffisants.' })
     // }
 }
+
 
 
 module.exports = { login, protect, restrict, restrictToOwnUser, correctUser }
