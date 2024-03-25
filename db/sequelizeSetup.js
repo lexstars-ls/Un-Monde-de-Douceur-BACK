@@ -34,18 +34,12 @@ User.belongsTo(Role)
 User.hasMany(Review)
 Review.belongsTo(User)
 
-// User.hasOne(Profil)
-// Profil.belongsTo(User)
-
-// Profil.hasMany(Review)
-// Review.belongsTo(Profil)
 
 
 sequelize.sync({ force: true })
     .then( async() => {
         await setRoles(Role)
         await setUsers(User)
-        // await setProfils(Profil)
         await setReviews(Review)
     
         

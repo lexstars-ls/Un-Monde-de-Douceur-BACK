@@ -6,7 +6,7 @@ const { findAllReviews, findReviewByPk, createReview, updateReview, deleteReview
 // Route pour obtenir toutes les critiques
 router.get('/', findAllReviews);
 
-// Route pour obtenir une critique par son identifiant
+// Route pour obtenir un avis par son identifiant
 router.get('/:id', findReviewByPk);
 
 // Route pour créer une nouvelle critique

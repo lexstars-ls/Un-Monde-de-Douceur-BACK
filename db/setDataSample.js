@@ -25,7 +25,10 @@ const setRoles = (Role) => {
 
 const setReviews = (Review) => {
     return Promise.all([
-        Review.create({ content: "Super expérience pour ce bain des merveilles", UserId: 1 })
+        Review.create({ content: "Super expérience pour ce bain des merveilles", UserId: 1 }),
+        Review.create({ content: "Super expérience pour ce bain des merveilles", UserId: 2 }),
+        Review.create({ content: "Super expérience pour ce bain des merveilles", UserId: 3 }),
+        Review.create({ content: "Super expérience pour ce bain des merveilles", UserId: 4 })
     ])
 }
 

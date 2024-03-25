@@ -29,7 +29,7 @@ const login = (req, res) => {
                         data: result.email, // Utilisation du champ "email" au lieu de "username"
                         dataId: result.id,
                         dataRole: result.RoleId,
-                        data: result.username, 
+                        dataUsername: result.username // Ajout du nom d'utilisateur
                         // Quand expire la session
                     }, SECRET_KEY, { expiresIn: '10h' });
 
@@ -45,6 +45,7 @@ const login = (req, res) => {
         })
 }
 
+
 // Middleware protect
 const protect = (req, res, next) => {
     if (!req.headers.authorization) {
@@ -56,7 +57,7 @@ const protect = (req, res, next) => {
     if (token) {
         try {
             const decoded = jwt.verify(token, SECRET_KEY);
-            req.username = decoded.data; // Utilisez 'username' plutôt que 'email' si c'est votre champ d'identification
+            req.email = decoded.data; // Utiliser 'email' pour récupérer l'email de l'utilisateur
             next();
         } catch (error) {
             return res.status(401).json({ message: `Le token n'est pas valide.` });
